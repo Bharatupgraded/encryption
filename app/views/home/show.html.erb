@@ -9,7 +9,11 @@
 
 <span id="etext"></span>
 <script type="text/javascript">
-  $("form.form").on('ajax:success', function(event,data){
+  $("form.form")
+  .on('ajax:error', function(event,data){
+    alert(data.responseJSON.text);
+  })
+  .on('ajax:success', function(event,data){
     $("#etext").html("<p><b>Encrypted Text: </b> "+data.text+"</p>");
   });
 </script>

@@ -9,7 +9,11 @@ class HomeController < ApplicationController
   def encrypt
     text = params[:text]
     integer = params[:integer]
-    @encrypted_text = encrypt_text(text, integer.to_i)
-    render :json => {text: @encrypted_text}, head: "OK"
+    if text.present?
+      @encrypted_text = encrypt_text(text, integer.to_i)
+      render :json => {text: @encrypted_text}, head: "OK"
+    else
+      render :json => {text: "Text must be filled out"}, :status => :unprocessable_entity
+    end
   end
 end
