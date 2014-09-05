@@ -1,0 +1,15 @@
+<h2>Encrypt Message</h2>
+<%= form_tag({:action => "encrypt"}, {:class => "form", remote: true, data_type: :json}) do %>
+  <%= label_tag "Enter Message" %>&nbsp;
+  <%= text_field_tag 'text', nil, placeholder: 'Enter message' %> <br>
+  <%= label_tag "Enter Number" %> &nbsp;
+  <%= select_tag "integer", options_for_select(0..10, "MasterCard") %><br>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<span id="etext"></span>
+<script type="text/javascript">
+  $("form.form").on('ajax:success', function(event,data){
+    $("#etext").html("<p><b>Encrypted Text: </b> "+data.text+"</p>");
+  });
+</script>
